@@ -1,0 +1,112 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Post {
+    id: ID!
+    title: String!
+    description: String!
+    created_at: String!
+}
+
+type PostResult {
+    success: Boolean!
+    errors: [String]
+    post: Post
+}
+
+type PostsResult {
+    success: Boolean!
+    errors: [String]
+    posts: [Post]
+}
+
+type Country {
+    id: ID!
+    name: String!
+    created_at: String!
+}
+
+type CountryResult {
+    success: Boolean!
+    errors: [String]
+    country: Country
+}
+
+type CountriesResult {
+    success: Boolean!
+    errors: [String]
+    countries: [Country]
+}
+
+type Address {
+    id: ID!
+    country_id: ID!
+    city: String!
+    state: String!
+    created_at: String!
+    country: Country
+}
+
+type AddressResult {
+    success: Boolean!
+    errors: [String]
+    address: Address
+}
+
+type AddressesResult {
+    success: Boolean!
+    errors: [String]
+    addresses: [Address]
+}
+
+type Client {
+    id: ID!
+    name: String!
+    last_name: String!
+    email: String!
+    phone: String!
+    created_at: String!
+    address: Address
+}
+
+type ClientResult {
+    success: Boolean!
+    errors: [String]
+    client: Client
+}
+
+type ClientsResult {
+    success: Boolean!
+    errors: [String]
+    clients: [Client]
+}
+
+type Query {
+    listPosts: PostsResult!
+    getPost(id: ID!): PostResult!
+    listCountries: CountriesResult!
+    getCountry(id: ID!): CountryResult!
+    listAddresses: AddressesResult!
+    getAddress(id: ID!): AddressResult!
+    listClients: ClientsResult!
+    getClient(id: ID!): ClientResult!
+    getClientsByCountry(country_id: ID!): ClientsResult!
+}
+
+type Mutation {
+    createPost(title: String!, description: String!, created_at: String): PostResult!
+    updatePost(id: ID!, title: String, description: String): PostResult!
+    deletePost(id: ID): PostResult!
+    createCountry(name: String!, created_at: String): CountryResult!
+    updateCountry(id: ID!, name: String): CountryResult!
+    deleteCountry(id: ID): CountryResult!
+    createAddress(country_id: ID!, city: String!, state: String!, created_at: String): AddressResult!
+    updateAddress(id: ID!, country_id: ID!, city: String, state: String): AddressResult!
+    deleteAddress(id: ID): AddressResult!
+    createClient(name: String!, last_name: String!, email: String!, address_id: ID!,, phone: String!, created_at: String): ClientResult!
+    updateClient(id: ID!, name: String, last_name: String, email: String, phone: String!, address_id: ID): ClientResult!
+    deleteClient(id: ID): ClientResult!
+}
+
